@@ -1,13 +1,46 @@
 import React, { useState } from "react";
 
-const PageMeta = ({ title, description }) => {
+// Type definitions for props
+interface PageMetaProps {
+  title: string;
+  description: string;
+}
+
+interface PageBreadcrumbProps {
+  pageTitle: string;
+}
+
+interface LabelProps {
+  htmlFor: string;
+  children: React.ReactNode;
+}
+
+interface DefaultInputProps {
+  id: string;
+  type?: string;
+  placeholder?: string;
+  value: string;
+  onChange: (value: string) => void;
+}
+
+interface TextAreaProps {
+  id: string;
+  rows?: number;
+  placeholder?: string;
+  value: string;
+  onChange: (value: string) => void;
+}
+
+// Page Meta Component
+const PageMeta: React.FC<PageMetaProps> = ({ title }) => {
   if (typeof document !== "undefined") {
     document.title = title;
   }
   return null;
 };
 
-const PageBreadcrumb = ({ pageTitle }) => (
+// Breadcrumb Component
+const PageBreadcrumb: React.FC<PageBreadcrumbProps> = ({ pageTitle }) => (
   <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
     <h2 className="text-3xl font-bold text-gray-800 dark:text-white">
       {pageTitle}
@@ -25,7 +58,8 @@ const PageBreadcrumb = ({ pageTitle }) => (
   </div>
 );
 
-const Label = ({ htmlFor, children }) => (
+// Label Component
+const Label: React.FC<LabelProps> = ({ htmlFor, children }) => (
   <label
     htmlFor={htmlFor}
     className="mb-2.5 block font-medium text-gray-700 dark:text-gray-200"
@@ -34,7 +68,14 @@ const Label = ({ htmlFor, children }) => (
   </label>
 );
 
-const DefaultInput = ({ id, type = "text", placeholder, value, onChange }) => (
+// Default Input Component
+const DefaultInput: React.FC<DefaultInputProps> = ({
+  id,
+  type = "text",
+  placeholder,
+  value,
+  onChange,
+}) => (
   <input
     id={id}
     type={type}
@@ -45,7 +86,14 @@ const DefaultInput = ({ id, type = "text", placeholder, value, onChange }) => (
   />
 );
 
-const TextArea = ({ id, rows, placeholder, value, onChange }) => (
+// TextArea Component
+const TextArea: React.FC<TextAreaProps> = ({
+  id,
+  rows = 4,
+  placeholder,
+  value,
+  onChange,
+}) => (
   <textarea
     id={id}
     rows={rows}
@@ -57,13 +105,13 @@ const TextArea = ({ id, rows, placeholder, value, onChange }) => (
 );
 
 // Main Support Form Component
-const SupportForm = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [problem, setProblem] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
+const SupportForm: React.FC = () => {
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [problem, setProblem] = useState<string>("");
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log({ name, email, problem });
     setIsSubmitted(true);
@@ -165,7 +213,7 @@ const SupportForm = () => {
 };
 
 // The main page component that brings everything together
-export default function App() {
+const SupportPage: React.FC = () => {
   return (
     <div className="p-4 md:p-6 2xl:p-10 bg-gray-50 dark:bg-gray-900 min-h-screen font-sans">
       <PageMeta
@@ -179,4 +227,6 @@ export default function App() {
       </div>
     </div>
   );
-}
+};
+
+export default SupportPage;
