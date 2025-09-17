@@ -43,7 +43,7 @@ export default function Home() {
               Need Help?
             </h2>
             <Link
-              to="/support"
+              to="/supportPage"
               className="inline-block rounded-lg bg-brand-500 px-5 py-2.5 text-white font-medium hover:bg-brand-600 transition"
             >
               Go to Support

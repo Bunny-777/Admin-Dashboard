@@ -17,8 +17,8 @@ import FormElements from "./pages/Forms/FormElements";
 import Blank from "./pages/Blank";
 import AppLayout from "./layout/AppLayout";
 import { ScrollToTop } from "./components/common/ScrollToTop";
-import Home from "./pages/Dashboard/Home";
-import Support from "./pages/Support";   // ✅ Added import
+import Home from "./pages/Dashboard/Home"; 
+import SupportPage from "./pages/SupportPage";
 
 export default function App() {
   return (
@@ -34,7 +34,7 @@ export default function App() {
             <Route path="/profile" element={<UserProfiles />} />
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/blank" element={<Blank />} />
-            <Route path="/support" element={<Support />} /> {/* ✅ Added route */}
+            <Route path="/supportPage" element={<SupportPage />} /> 
 
             {/* Forms */}
             <Route path="/form-elements" element={<FormElements />} />
